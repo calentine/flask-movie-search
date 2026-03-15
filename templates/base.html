@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TMDB Movie Explorer</title>
+    <title>Codeje's TMDB Movie Explorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
@@ -12,94 +12,102 @@
       class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800"
     >
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-20 items-center justify-between">
-          <div class="flex items-center gap-8">
-            <a
-              href="/"
-              class="flex items-center gap-2 hover:opacity-80 transition"
-            >
-              <ion-icon
-                name="videocam"
-                class="text-red-600 text-3xl"
-              ></ion-icon>
-              <span class="text-xl font-bold tracking-tighter"
-                >Codeje Movie Search</span
+        <div class="flex h-20 items-center justify-between gap-4">
+          <a
+            href="/"
+            class="flex items-center gap-2 hover:opacity-80 transition shrink-0"
+          >
+            <ion-icon name="videocam" class="text-red-600 text-3xl"></ion-icon>
+
+            <div class="flex flex-col leading-[0.9]">
+              <span class="text-lg md:text-xl font-bold tracking-tighter"
+                >Codeje</span
               >
-            </a>
+              <span
+                class="text-[10px] md:text-xs font-bold tracking-tighter text-gray-400"
+                >Movie Search</span
+              >
+            </div>
+          </a>
 
-            <nav class="hidden lg:block">
-              <div class="flex items-center gap-6">
-                <form
-                  action="/movies"
-                  method="get"
-                  class="flex items-center gap-2"
-                >
-                  <select
-                    name="category"
-                    id="category"
-                    class="bg-gray-800 text-gray-200 text-sm rounded-lg border-none focus:ring-2 focus:ring-red-600 py-2 px-3"
-                  >
-                    <option value="popular">Popular</option>
-                    <option value="top_rated">Top Rated</option>
-                    <option value="now_playing">Now Playing</option>
-                    <option value="upcoming">Upcoming</option>
-                  </select>
-                  <button
-                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
-                    type="submit"
-                  >
-                    Browse
-                  </button>
-                </form>
-
-                <a
-                  href="/"
-                  class="text-gray-300 hover:text-white transition font-mono text-sm"
-                  >Home</a
-                >
-
-                <a
-                  href="/watchlist"
-                  class="relative group flex items-center gap-2 text-gray-300 hover:text-white transition font-mono text-sm"
-                >
-                  <ion-icon name="bookmark" class="text-red-600"></ion-icon>
-                  Watchlist
-                  <span
-                    id="navBadge"
-                    class="hidden absolute -top-2 -right-2 bg-red-600 text-[10px] text-white px-1.5 py-0.5 rounded-full border border-black animate-pulse"
-                    >!</span
-                  >
-                  >
-                </a>
-                <a
-                  href="/watched"
-                  class="text-gray-300 hover:text-white transition font-mono text-sm flex items-center gap-2"
-                >
-                  <ion-icon
-                    name="checkmark-done"
-                    class="text-green-500"
-                  ></ion-icon>
-                  Watched
-                </a>
-              </div>
-            </nav>
-          </div>
-
-          <div class="flex items-center">
+          <div class="flex-1 max-w-xs">
             <form action="/search_movie" method="get" class="relative group">
               <input
                 type="text"
-                id="movie_name"
                 name="movie_name"
-                placeholder="Search movies..."
-                class="bg-gray-800 text-white rounded-full pl-10 pr-4 py-2 w-64 border border-transparent focus:border-red-600 focus:ring-0 transition-all"
+                placeholder="Search..."
+                class="bg-gray-800 text-white rounded-full pl-9 pr-4 py-1.5 w-full text-sm border border-transparent focus:border-red-600 focus:ring-0 transition-all"
               />
-              <div class="absolute left-3 top-2.5 text-gray-400">
+              <div class="absolute left-3 top-2 text-gray-400">
                 <ion-icon name="search-outline"></ion-icon>
               </div>
-              <button type="submit" class="hidden">Search</button>
             </form>
           </div>
+
+          <button id="menuToggle" class="lg:hidden text-3xl text-gray-300">
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+
+          <nav
+            id="navMenu"
+            class="hidden absolute top-20 left-0 w-full bg-gray-900 border-b border-gray-800 p-6 lg:static lg:block lg:w-auto lg:bg-transparent lg:border-none lg:p-0"
+          >
+            <div
+              class="flex flex-col lg:flex-row items-start lg:items-center gap-6"
+            >
+              <form
+                action="/movies"
+                method="get"
+                class="flex items-center gap-2 w-full lg:w-auto"
+              >
+                <select
+                  name="category"
+                  class="bg-gray-800 text-white text-sm rounded-lg border-none py-2 px-3 w-full lg:w-32"
+                >
+                  <option value="popular">Popular</option>
+                  <option value="top_rated">Top Rated</option>
+                  <option value="now_playing">Now Playing</option>
+                  <option value="upcoming">Upcoming</option>
+                </select>
+                <button
+                  class="bg-red-600 px-4 py-2 rounded-lg text-sm font-bold"
+                  type="submit"
+                >
+                  Browse
+                </button>
+              </form>
+
+              <a
+                href="/"
+                class="text-gray-300 hover:text-white font-mono text-sm"
+                >Home</a
+              >
+
+              <a
+                href="/watchlist"
+                class="relative flex items-center gap-2 text-gray-300 hover:text-white font-mono text-sm"
+              >
+                <ion-icon name="bookmark" class="text-red-600"></ion-icon>
+                Watchlist
+                <span
+                  id="navBadge"
+                  class="hidden bg-red-600 text-[10px] px-1.5 py-0.5 rounded-full border border-black"
+                  >!</span
+                >
+              </a>
+
+              <a
+                href="/watched"
+                class="text-gray-300 hover:text-white font-mono text-sm flex items-center gap-2"
+              >
+                <ion-icon
+                  name="checkmark-done"
+                  class="text-green-500"
+                ></ion-icon>
+                Watched
+              </a>
+            </div>
+          </nav>
         </div>
       </div>
     </header>
@@ -109,7 +117,7 @@
       <div class="mb-4">
         <div class="flex flex-col items-center justify-center text-center mb-6">
           <h1
-            class="text-5xl font-extrabold mb-4 text-white italic tracking-tighter pb-2 inline-block"
+            class="text-3xl md:text-5xl font-extrabold mb-4 text-white italic tracking-tighter pb-2"
           >
             Search Movies Instantly
           </h1>
@@ -181,6 +189,19 @@
       if (count > 0) {
         document.getElementById("navBadge").classList.remove("hidden");
       }
+    </script>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+        // Change icon between 'menu' and 'close'
+        const icon = menuToggle.querySelector("ion-icon");
+        icon.name =
+          icon.name === "menu-outline" ? "close-outline" : "menu-outline";
+      });
     </script>
   </body>
 </html>
