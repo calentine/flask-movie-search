@@ -1,58 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMDB Movie Lists</title>
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
-</head>
-<body class="bg-blue-400 flex flex-col min-h-screen">
-    <header class="bg-gray-800">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <ion-icon name="videocam" size="large" class="text-white"></ion-icon>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <form action="/movies" method="get" class="inline-block">
-                                <label for="category" class="text-gray-300 text-sm font-medium">Choose a category:</label>
-                                <select name="category" id="category" class="bg-gray-700 text-white rounded-md px-2 py-1">
-                                    <option value="popular">Popular</option>
-                                    <option value="top_rated">Top Rated</option>
-                                    <option value="now_playing">Now Playing</option>
-                                    <option value="upcoming">Upcoming</option>
-                                </select>
-                                <button class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" type="submit">Get Movies</button>
-                            </form>
-                            <form action="/search_movie" method="get" class="inline-block">
-                                <label for="movie_name" class="sr-only">Search Movie</label>
-                                <input type="text" id="movie_name" name="movie_name" placeholder="Enter a movie or actor name..." class="bg-gray-700 text-left text-white rounded-md px-10 py-1">
-                                <button class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TMDB Movie Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+  </head>
+  <body class="bg-gray-950 text-white flex flex-col min-h-screen font-sans">
+    <header
+      class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800"
+    >
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-20 items-center justify-between">
+          <div class="flex items-center gap-8">
+            <a
+              href="/"
+              class="flex items-center gap-2 hover:opacity-80 transition"
+            >
+              <ion-icon
+                name="videocam"
+                class="text-red-600 text-3xl"
+              ></ion-icon>
+              <span class="text-xl font-bold tracking-tighter"
+                >Codeje Movie Search</span
+              >
+            </a>
+
+            <nav class="hidden lg:block">
+              <div class="flex items-center gap-6">
+                <form
+                  action="/movies"
+                  method="get"
+                  class="flex items-center gap-2"
+                >
+                  <select
+                    name="category"
+                    id="category"
+                    class="bg-gray-800 text-gray-200 text-sm rounded-lg border-none focus:ring-2 focus:ring-red-600 py-2 px-3"
+                  >
+                    <option value="popular">Popular</option>
+                    <option value="top_rated">Top Rated</option>
+                    <option value="now_playing">Now Playing</option>
+                    <option value="upcoming">Upcoming</option>
+                  </select>
+                  <button
+                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
+                    type="submit"
+                  >
+                    Browse
+                  </button>
+                </form>
+
+                <a
+                  href="/"
+                  class="text-gray-300 hover:text-white transition font-mono text-sm"
+                  >Home</a
+                >
+
+                <a
+                  href="/watchlist"
+                  class="relative group flex items-center gap-2 text-gray-300 hover:text-white transition font-mono text-sm"
+                >
+                  <ion-icon name="bookmark" class="text-red-600"></ion-icon>
+                  Watchlist
+                  <span
+                    id="navBadge"
+                    class="hidden absolute -top-2 -right-2 bg-red-600 text-[10px] text-white px-1.5 py-0.5 rounded-full border border-black animate-pulse"
+                    >!</span
+                  >
+                  >
+                </a>
+                <a
+                  href="/watched"
+                  class="text-gray-300 hover:text-white transition font-mono text-sm flex items-center gap-2"
+                >
+                  <ion-icon
+                    name="checkmark-done"
+                    class="text-green-500"
+                  ></ion-icon>
+                  Watched
+                </a>
+              </div>
+            </nav>
+          </div>
+
+          <div class="flex items-center">
+            <form action="/search_movie" method="get" class="relative group">
+              <input
+                type="text"
+                id="movie_name"
+                name="movie_name"
+                placeholder="Search movies..."
+                class="bg-gray-800 text-white rounded-full pl-10 pr-4 py-2 w-64 border border-transparent focus:border-red-600 focus:ring-0 transition-all"
+              />
+              <div class="absolute left-3 top-2.5 text-gray-400">
+                <ion-icon name="search-outline"></ion-icon>
+              </div>
+              <button type="submit" class="hidden">Search</button>
+            </form>
+          </div>
         </div>
+      </div>
     </header>
 
-    <main class="flex-grow p-4">
-        {% block content %}
-        <h1>Welcome To A Flask Movie API</h1>     
-        {% endblock %}
+    <main class="flex-grow container mx-auto px-4 py-4">
+      {% block content %}
+      <div class="mb-4">
+        <div class="flex flex-col items-center justify-center text-center mb-6">
+          <h1
+            class="text-5xl font-extrabold mb-4 text-white italic tracking-tighter pb-2 inline-block"
+          >
+            Search Movies Instantly
+          </h1>
+        </div>
+
+        {% if trending_movies %}
+        <div class="mt-2">
+          <h3
+            class="text-xl text-[rgb(100,0,0)] font-bold mb-6 border-l-4 border-red-600 pl-4 uppercase tracking-tighter"
+          >
+            Trending Movies
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+            {% for movie in trending_movies %}
+            <a
+              href="/movie/{{ movie['id'] }}"
+              class="group relative aspect-[2/3] rounded-xl overflow-hidden border border-gray-800 hover:border-red-600 transition-all duration-300"
+            >
+              <img
+                src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                alt="{{ movie['title'] }}"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4"
+              >
+                <p class="text-xs font-bold text-white truncate">
+                  {{ movie['title'] }}
+                </p>
+                <p class="text-[10px] text-yellow-500">
+                  ★ {{ movie['vote_average']|round(1) }}
+                </p>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endblock %}
     </main>
 
-    <footer class="bg-gray-800 p-4 text-white">
-        <p class="text-gray-300 text-sm font-small" >© 2024 Flask-movie-app</p>
+    <footer class="bg-gray-950 border-t border-gray-900 p-8">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <p class="text-gray-500 text-sm">
+          © 2026 Codeje Movie Search • Built with Flask
+        </p>
+        <div class="flex gap-4 text-gray-400 text-xl">
+          <ion-icon name="logo-github"></ion-icon>
+          <ion-icon name="logo-twitter"></ion-icon>
+        </div>
+      </div>
     </footer>
 
-    <!-- Ionicons -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      const watchlistData = JSON.parse(
+        localStorage.getItem("codeje_watchlist") || "[]",
+      );
+      const count = watchlistData.length;
+
+      if (count > 0) {
+        document.getElementById("navBadge").classList.remove("hidden");
+      }
+    </script>
+  </body>
 </html>

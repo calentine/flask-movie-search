@@ -1,19 +1,49 @@
+{% extends "base.html" %}
 
-    {% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="flex justify-between items-end mb-8">
+        <h1 class="text-3xl font-bold border-l-4 border-red-600 pl-4">
+            {{ category.replace('_', ' ') | capitalize }} Movies
+        </h1>
+        <a href="/" class="text-sm text-gray-400 hover:text-white transition flex items-center gap-1">
+            <ion-icon name="arrow-back-outline"></ion-icon> Back to Home
+        </a>
+    </div>
 
-    {% block content %}
-        <h1>{{ category.replace('_', ' ') | capitalize }} Movies</h1>
-        <a href="/" class="button">Back to Home</a></button>
-        <ul class='movie_container'>
-            {% for movie in movies %}
-                <div class='movie_details'>
-                    <img src="https://image.tmdb.org/t/p/w92{{ movie['poster_path'] }}" alt="{{ movie['title'] }} Poster">
-                    <li>
-                        <h6>{{ movie['title'] }}
-                        ({{ movie['release_date'] }})</h6>
-                    </li>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {% for movie in movies %}
+        <a href="/movie/{{ movie['id'] }}" class="group bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 border border-gray-800">
+            <div class="relative aspect-[2/3]">
+                {% if movie['poster_path'] %}
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}" 
+                         alt="{{ movie['title'] }}" 
+                         class="w-full h-full object-cover">
+                {% else %}
+                    <div class="w-full h-full bg-gray-800 flex flex-col items-center justify-center text-gray-500 p-4 text-center">
+                        <ion-icon name="image-outline" size="large"></ion-icon>
+                        <span class="text-xs mt-2">No Poster Available</span>
+                    </div>
+                {% endif %}
+                
+                <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div class="bg-white/20 backdrop-blur-md p-4 rounded-full">
+                        <ion-icon name="search-outline" class="text-white text-3xl"></ion-icon>
+                    </div>
                 </div>
-            {% endfor %}
-        </ul>
-    {% endblock %}
-
+            </div>
+            
+            <div class="p-4">
+                <h3 class="font-bold text-sm line-clamp-1 group-hover:text-red-500 transition">{{ movie['title'] }}</h3>
+                <div class="flex justify-between items-center mt-2 font-mono">
+                    <span class="text-xs text-gray-500">{{ movie['release_date'][:4] if movie['release_date'] else 'N/A' }}</span>
+                    <span class="flex items-center gap-1 text-xs text-yellow-500">
+                        <ion-icon name="star"></ion-icon> {{ movie['vote_average'] }}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

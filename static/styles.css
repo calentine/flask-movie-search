@@ -21,7 +21,8 @@
 .blank_div {
     height: 138px;
     width: 92px;
-    border: 2px solid black; /* Corrected syntax */
+    border: 1px solid #3f3f46;
+    border-radius: 1.5rem;
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
@@ -31,7 +32,7 @@
 }
 
 h1 {
-    color: #fff;
+    color: #ffffff;
     font-size: 22px;
     text-shadow: 1px 1px 2px #152238;
 }
