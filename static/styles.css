@@ -59,3 +59,19 @@ h1 {
 .button:active {
     background-color: #152238;
 }
+
+@keyframes activePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); /* red-600 at 0% opacity */
+  }
+  50% {
+    box-shadow: 0 0 8px 3px rgba(142, 140, 140, 0.4); /* gray-600 at 40% opacity */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); /* red-600 at 0% opacity */
+  }
+}
+
+.active-glow {
+  animation: activePulse 2s infinite ease-in-out;
+}

@@ -53,58 +53,40 @@
             class="hidden absolute top-20 left-0 w-full bg-gray-900 border-b border-gray-800 p-6 lg:static lg:block lg:w-auto lg:bg-transparent lg:border-none lg:p-0"
           >
             <div
-              class="flex flex-col lg:flex-row items-start lg:items-center gap-6"
+              class="flex flex-col lg:flex-row items-start lg:items-center gap-4"
             >
-              <form
-                action="/movies"
-                method="get"
-                class="flex items-center gap-2 w-full lg:w-auto"
-              >
-                <select
-                  name="category"
-                  class="bg-gray-800 text-white text-sm rounded-lg border-none py-2 px-3 w-full lg:w-32"
-                >
-                  <option value="popular">Popular</option>
-                  <option value="top_rated">Top Rated</option>
-                  <option value="now_playing">Now Playing</option>
-                  <option value="upcoming">Upcoming</option>
-                </select>
-                <button
-                  class="bg-red-600 px-4 py-2 rounded-lg text-sm font-bold"
-                  type="submit"
-                >
-                  Browse
-                </button>
-              </form>
-
               <a
                 href="/"
-                class="text-gray-300 hover:text-white font-mono text-sm"
-                >Home</a
+                class="px-4 py-1.5 rounded-full text-sm font-bold transition-all duration-300
+       {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
               >
+                Home
+              </a>
 
               <a
                 href="/watchlist"
-                class="relative flex items-center gap-2 text-gray-300 hover:text-white font-mono text-sm"
+                class="px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 transition-all duration-300
+       {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/watchlist' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
               >
-                <ion-icon name="bookmark" class="text-red-600"></ion-icon>
                 Watchlist
+                <ion-icon name="bookmark" class="text-red-600"></ion-icon>
                 <span
                   id="navBadge"
                   class="hidden bg-red-600 text-[10px] px-1.5 py-0.5 rounded-full border border-black"
-                  >!</span
+                  ></span
                 >
               </a>
 
               <a
                 href="/watched"
-                class="text-gray-300 hover:text-white font-mono text-sm flex items-center gap-2"
+                class="px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 transition-all duration-300
+       {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/watched' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
               >
+                Watched
                 <ion-icon
                   name="checkmark-done"
                   class="text-green-500"
                 ></ion-icon>
-                Watched
               </a>
             </div>
           </nav>
