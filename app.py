@@ -1,11 +1,16 @@
 from flask import Flask, render_template, request
 import os
+from dotenv import load_dotenv
 import requests
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
 # Constants for TMDB API
 API_KEY = os.environ.get("TMDB_API_KEY") 
+# API_KEY = '14207e5d8c426a1eb6358c1fa1bc4a02'
 BASE_URL = "https://api.themoviedb.org/3"
 
 
@@ -19,16 +24,16 @@ def make_api_request(endpoint, params):
     else:
         return None
 
-
+# Based Route fetches trending movies for the homepage
 @app.route("/")
 def base_route():
-    # Fetch trending movies for the homepage
     params = {"language": "en-US"}
     trending_data = make_api_request("trending/movie/week", params)
 
     trending_movies = []
+    # Get top 10 trending movies
     if trending_data:
-        trending_movies = trending_data.get("results", [])[:10]  # Get top 10
+        trending_movies = trending_data.get("results", [])[:10]
 
     return render_template("base.html", trending_movies=trending_movies)
 
