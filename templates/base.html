@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Codeje's TMDB Movie Explorer</title>
+    <title>Codej&#275;'s TMDB Movie Explorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
@@ -21,7 +21,7 @@
 
             <div class="flex flex-col leading-[0.9]">
               <span class="text-lg md:text-xl font-bold tracking-tighter"
-                >Codeje</span
+                >Codej&#275;</span
               >
               <span
                 class="text-[10px] md:text-xs font-bold tracking-tighter text-gray-400"
@@ -143,17 +143,25 @@
     </main>
 
     <footer class="bg-gray-950 border-t border-gray-900 p-8">
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <p class="text-gray-500 text-sm">
-          © 2026 Codeje Movie Search • Built with Flask
+          © 2026 Codej&#275; Movie Search • Built with Flask
         </p>
-        <div class="flex gap-4 text-gray-400 text-xl">
-          <a href="https://github.com/calentine" target="_blank">
-            <ion-icon name="logo-github"></ion-icon>
+        <div class="flex gap-4">
+          <a
+            href="https://github.com/calentine"
+            target="_blank"
+            class="group flex items-center justify-center w-10 h-10 rounded-xl border border-gray-800 hover:border-white hover:scale-110 transition-all duration-300 text-gray-400 hover:text-white"
+          >
+            <ion-icon name="logo-github" class="text-xl"></ion-icon>
           </a>
 
-          <a href="https://www.linkedin.com/in/jcalentine" target="_blank">
-            <ion-icon name="logo-linkedin"></ion-icon>
+          <a
+            href="https://www.linkedin.com/in/jcalentine"
+            target="_blank"
+            class="group flex items-center justify-center w-10 h-10 rounded-xl border border-gray-800 hover:border-[#0077b5] hover:scale-110 transition-all duration-300 text-gray-400 hover:text-[#0077b5]"
+          >
+            <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
           </a>
         </div>
       </div>
@@ -185,7 +193,11 @@
 
       // Execute for both badges
       updateIconIfDataExists("codeje_watchlist", "watchlistBadge", "bookmark");
-      updateIconIfDataExists("codeje_watched", "watchedBadge", "checkmark-circle");
+      updateIconIfDataExists(
+        "codeje_watched",
+        "watchedBadge",
+        "checkmark-circle",
+      );
     </script>
 
     <script>
