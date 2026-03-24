@@ -69,12 +69,11 @@
        {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/watchlist' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
               >
                 Watchlist
-                <ion-icon name="bookmark" class="text-red-600"></ion-icon>
-                <span
-                  id="navBadge"
-                  class="hidden bg-red-600 text-[10px] px-1.5 py-0.5 rounded-full border border-black"
-                  >!</span
-                >
+                <ion-icon
+                  id="watchlistBadge"
+                  name="bookmark-outline"
+                  class="text-red-600"
+                ></ion-icon>
               </a>
 
               <a
@@ -84,7 +83,8 @@
               >
                 Watched
                 <ion-icon
-                  name="checkmark-done"
+                  id="watchedBadge"
+                  name="checkmark-circle-outline"
                   class="text-green-500"
                 ></ion-icon>
               </a>
@@ -148,8 +148,13 @@
           © 2026 Codeje Movie Search • Built with Flask
         </p>
         <div class="flex gap-4 text-gray-400 text-xl">
-          <ion-icon name="logo-github"></ion-icon>
-          <ion-icon name="logo-twitter"></ion-icon>
+          <a href="https://github.com/calentine" target="_blank">
+            <ion-icon name="logo-github"></ion-icon>
+          </a>
+
+          <a href="https://www.linkedin.com/in/jcalentine" target="_blank">
+            <ion-icon name="logo-linkedin"></ion-icon>
+          </a>
         </div>
       </div>
     </footer>
@@ -162,15 +167,25 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-    <script>
-      const watchlistData = JSON.parse(
-        localStorage.getItem("codeje_watchlist") || "[]",
-      );
-      const count = watchlistData.length;
 
-      if (count > 0) {
-        document.getElementById("navBadge").classList.remove("hidden");
-      }
+    <script>
+      // Function to check localStorage and update icons accordingly
+      const updateIconIfDataExists = (
+        localStorageKey,
+        elementId,
+        activeIconName,
+      ) => {
+        const data = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
+        const iconElement = document.getElementById(elementId);
+
+        if (data.length > 0 && iconElement) {
+          iconElement.setAttribute("name", activeIconName);
+        }
+      };
+
+      // Execute for both badges
+      updateIconIfDataExists("codeje_watchlist", "watchlistBadge", "bookmark");
+      updateIconIfDataExists("codeje_watched", "watchedBadge", "checkmark-circle");
     </script>
 
     <script>

@@ -199,16 +199,35 @@
       const btn = document.getElementById('watchlistBtn');
       const icon = document.getElementById('watchlistIcon');
       const text = document.getElementById('watchlistText');
-      if (isSaved) { btn.classList.add('bg-red-600'); icon.setAttribute('name', 'bookmark'); text.innerText = 'On Watchlist'; }
-      else { btn.classList.remove('bg-red-600'); icon.setAttribute('name', 'bookmark-outline'); text.innerText = 'Add to Watchlist'; }
+      if (isSaved) { 
+        btn.classList.remove('border-gray-700');
+        btn.classList.add('border-red-800', 'bg-red-600');
+        icon.setAttribute('name', 'bookmark');
+        text.innerText = 'On Watchlist';
+    } else {
+        btn.classList.add('border-gray-700');
+        btn.classList.remove('border-red-800', 'bg-red-600');
+        icon.setAttribute('name', 'bookmark-outline');
+        text.innerText = 'Add to Watchlist';
+      }
   }
 
   function updateWatchedUI(isWatched) {
       const btn = document.getElementById('watchedBtn');
       const icon = document.getElementById('watchedIcon');
       const text = document.getElementById('watchedText');
-      if (isWatched) { btn.classList.add('bg-green-600'); icon.setAttribute('name', 'checkmark-circle'); text.innerText = 'Watched'; }
-      else { btn.classList.remove('bg-green-600'); icon.setAttribute('name', 'checkmark-circle-outline'); text.innerText = 'Mark as Watched'; }
+      if (isWatched) { 
+        btn.classList.remove('border-gray-700');
+        btn.classList.add('border-green-700','bg-green-600'); 
+        icon.setAttribute('name', 'checkmark-circle'); 
+        text.innerText = 'Watched'; 
+      }
+      else { 
+        btn.classList.add('border-gray-700');
+        btn.classList.remove('border-green-700','bg-green-600'); 
+        icon.setAttribute('name', 'checkmark-circle-outline'); 
+        text.innerText = 'Mark as Watched'; 
+      }
   }
 
   checkStatus();
