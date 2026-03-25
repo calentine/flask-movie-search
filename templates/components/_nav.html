@@ -1,42 +1,35 @@
-<nav
-        id="navMenu"
-        class="hidden absolute top-20 left-0 w-full bg-gray-900 border-b border-gray-800 p-6 lg:static lg:block lg:w-auto lg:bg-transparent lg:border-none lg:p-0"
-      >
-        <div
-          class="flex flex-col lg:flex-row items-start lg:items-center gap-4"
-        >
-          <a
-            href="/"
-            class="px-4 py-1.5 rounded-full text-sm font-bold transition-all duration-300
+<div class="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+  <a
+    href="/"
+    class="px-4 py-1.5 rounded-full text-sm font-bold transition-all duration-300
        {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
-          >
-            Home
-          </a>
+  >
+    Home
+  </a>
 
-          <a
-            href="/watchlist"
-            class="px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 transition-all duration-300
+  <a
+    href="/watchlist"
+    class="px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 transition-all duration-300
        {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/watchlist' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
-          >
-            Watchlist
-            <ion-icon
-              id="watchlistBadge"
-              name="bookmark-outline"
-              class="text-red-600"
-            ></ion-icon>
-          </a>
+  >
+    Watchlist
+    <ion-icon
+      id="watchlistBadge"
+      name="bookmark-outline"
+      class="text-red-600"
+    ></ion-icon>
+  </a>
 
-          <a
-            href="/watched"
-            class="px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 transition-all duration-300
+  <a
+    href="/watched"
+    class="px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 transition-all duration-300
        {{ 'bg-gray-800/80 text-white active-glow' if request.path == '/watched' else 'text-gray-400 hover:text-white hover:bg-gray-800/50' }}"
-          >
-            Watched
-            <ion-icon
-              id="watchedBadge"
-              name="checkmark-circle-outline"
-              class="text-green-500"
-            ></ion-icon>
-          </a>
-        </div>
-      </nav>
+  >
+    Watched
+    <ion-icon
+      id="watchedBadge"
+      name="checkmark-circle-outline"
+      class="text-green-500"
+    ></ion-icon>
+  </a>
+</div>

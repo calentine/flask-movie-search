@@ -1,27 +1,38 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Codej&#275;'s TMDB Movie Explorer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
+    {% include 'components/_head.html' %}
   </head>
   <body class="bg-gray-950 text-white flex flex-col min-h-screen font-sans">
-    {% include 'components/_header.html' %}
-
+    <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-20 items-center justify-between gap-4">
+          {% include 'components/_logo.html' %} 
+          {% include 'components/_category_dropdown.html' %} 
+          {% include 'components/_search_bar.html' %} 
+          <nav id="navMenu" class="hidden absolute top-20 left-0 w-full bg-gray-900 border-b border-gray-800 p-6 lg:static lg:block lg:w-auto lg:bg-transparent lg:border-none lg:p-0">
+            {% include'components/_nav.html' %}
+          </nav>
+        </div>
+      </div>
+    </header>
     <main class="flex-grow container mx-auto px-4 py-4">
       {% block content %} {% endblock %}
     </main>
 
-    {% include 'components/_footer.html' %}
+    <footer class="bg-gray-950 border-t border-gray-900 p-8">
+      {% include 'components/_footer.html' %}
+    </footer>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-  
   </body>
 </html>
