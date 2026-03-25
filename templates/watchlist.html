@@ -42,12 +42,15 @@
   } else {
     clearBtn.classList.remove("hidden");
     watchlist.forEach(movie => {
+      // 1. Perform the replacement into the template
       let html = templateHtml
         .replace(/ID_VAL/g, movie.id)
         .replace(/TITLE_VAL/g, movie.title)
-        .replace(/POSTER_VAL/g, `https://image.tmdb.org/t/p/w500${movie.poster}`)
-        .replace(/VOTE_VAL/g, movie.rating)
-        .replace(/DATE_VAL/g, movie.year || 'N/A');
+        // Ensure the path is correct even if movie.poster already has a slash
+        .replace(/POSTER_VAL/g, movie.poster ? `https://image.tmdb.org/t/p/w500${movie.poster}` : '')
+        .replace(/VOTE_VAL/g, movie.rating || movie.vote_average || '0')
+        .replace(/DATE_VAL/g, movie.release_date || 'N/A');
+        
       grid.innerHTML += html;
     });
   }

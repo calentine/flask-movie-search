@@ -264,6 +264,7 @@
       title: "{{ movie['title']|replace('\"', '') }}",
       poster: "{{ movie['poster_path'] }}",
       rating: "{{ movie['vote_average']|round(1) }}",
+      release_date: "{{ movie['release_date'] }}"
     };
 
     function checkStatus() {
