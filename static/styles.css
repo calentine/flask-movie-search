@@ -1,77 +1,46 @@
-.movie_container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: auto;
-    width: auto;
-}
-
-#movie_name{
-    width: 300px;
-}
-.movie_details {
-    margin: 10px;
-    list-style: none;
-    width: 92px;
-    height: auto;
-    font-size: small;
-    font-weight: 600;
-}
-
-.blank_div {
-    height: 138px;
-    width: 92px;
-    border: 1px solid #3f3f46;
-    border-radius: 1.5rem;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    text-align: center;
-    font-size: small;
-    font-weight: 600;
-}
-
+/* 1. Custom Brand Styles */
 h1 {
-    color: #ffffff;
-    font-size: 22px;
-    text-shadow: 1px 1px 2px #152238;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #fff;
-    background-color: #152238;
-    border: none;
-    border-radius: 15px;
-    margin: 10px;
-}
-
-.button:hover {
-    background-color: gray;
-}
-
-.button:active {
-    background-color: #152238;
-}
-
+/* 2. Navigation Pulse Animation */
 @keyframes activePulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); /* red-600 at 0% opacity */
-  }
-  50% {
-    box-shadow: 0 0 8px 3px rgba(142, 140, 140, 0.4); /* gray-600 at 40% opacity */
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); /* red-600 at 0% opacity */
-  }
+    0% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+    50% {
+        box-shadow: 0 0 8px 3px rgba(142, 140, 140, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
 }
 
 .active-glow {
-  animation: activePulse 2s infinite ease-in-out;
+    animation: activePulse 2s infinite ease-in-out;
+    border: 1px solid #3f3f46; /* Adds a subtle red border to the active link */
+}
+
+@media (max-width: 1024px) {
+    #dropdownMenu a:active {
+        background-color: rgba(220, 38, 38, 0.2); /* Light red flash on tap */
+    }
+}
+
+/* 3. Custom Scrollbar (Optional but recommended for Dark Mode) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
 }

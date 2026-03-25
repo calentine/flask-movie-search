@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "components/_movie_cards.html" import movie_card %}
+
+{% block content %}
+<div class="mb-4">
+    <div class="flex flex-col items-center justify-center text-center mb-6">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-4 italic tracking-tighter pb-2">
+            Search Movies Instantly
+        </h1>
+    </div>
+
+    <h3 class="text-xl text-red-600 font-bold mb-6 border-l-4 border-red-600 pl-4 uppercase tracking-tighter">
+        Trending Movies
+    </h3>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {% for movie in trending_movies %}
+            {{ movie_card(movie) }}
+        {% else %}
+            <p class="col-span-full text-center text-gray-500">No trending movies found at this time.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

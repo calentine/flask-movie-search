@@ -25,7 +25,7 @@ def make_api_request(endpoint, params):
 
 # Based Route fetches trending movies for the homepage
 @app.route("/")
-def base_route():
+def index():
     params = {"language": "en-US"}
     trending_data = make_api_request("trending/movie/week", params)
 
@@ -34,7 +34,7 @@ def base_route():
     if trending_data:
         trending_movies = trending_data.get("results", [])[:10]
 
-    return render_template("base.html", trending_movies=trending_movies)
+    return render_template("index.html", trending_movies=trending_movies)
 
 
 @app.route("/movies")
@@ -42,10 +42,19 @@ def movies():
     category = request.args.get("category")
     if category:
         params = {"language": "en-US", "page": 1}
-        movies_data = make_api_request(f"movie/{category}", params)
+        
+        # LOGIC CHECK: Trending uses a different URL structure than the others
+        if category == "trending":
+            endpoint = "trending/movie/week" # You can also use 'day'
+        else:
+            endpoint = f"movie/{category}"
+            
+        movies_data = make_api_request(endpoint, params)
         if movies_data:
             return render_template(
-                "movies.html", movies=movies_data.get("results", []), category=category
+                "movies.html", 
+                movies=movies_data.get("results", []), 
+                category=category
             )
         else:
             return "Failed to retrieve data from TMDB API", 500
@@ -60,7 +69,7 @@ def search_movie():
         search_results = make_api_request("search/movie", params)
         if search_results:
             return render_template(
-                "movie.html", search_results=search_results.get("results", [])
+                "search_movie.html", search_results=search_results.get("results", [])
             )
         else:
             return "Failed to retrieve data from TMDB API", 500

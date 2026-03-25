@@ -5,12 +5,7 @@
 <section>
     <div class="flex justify-between items-end mb-8">
         <h1 class="text-3xl font-bold border-l-4 border-red-600 pl-4">
-            {% if category == 'trending' %}
-                Weekly Trending
-            {% else %}
-                {{ category|replace('_', ' ')|capitalize }}
-            {% endif %} 
-            Movies
+            Search Results
         </h1>
         <a href="/" class="text-sm text-gray-400 hover:text-white transition flex items-center gap-1">
             <ion-icon name="arrow-back-outline"></ion-icon> Back to Home
@@ -18,8 +13,14 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        {% for movie in movies %}
+        {% for movie in search_results %}
             {{ movie_card(movie) }}
+        {% else %}
+            <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
+                <ion-icon name="alert-circle-outline" class="text-6xl text-gray-700 mb-4"></ion-icon>
+                <h2 class="text-2xl font-bold">No Results for <span class="text-red-500">"{{ request.args.get('movie_name', '') }}"</span></h2>
+                <a href="/" class="mt-8 bg-red-600 px-6 py-2 rounded-full text-white font-bold hover:bg-red-700 transition">Try another search</a>
+            </div>
         {% endfor %}
     </div>
 </section>

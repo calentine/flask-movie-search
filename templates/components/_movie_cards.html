@@ -1,0 +1,55 @@
+{% macro movie_card(movie) %}
+<a
+  href="/movie/{{ movie['id'] }}"
+  class="group bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 border border-gray-800"
+>
+  <div class="relative aspect-[2/3]">
+    {% if movie['poster_path'] and movie['poster_path'] != 'POSTER_VAL' %}
+    <img
+      src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}"
+      alt="{{ movie['title'] }}"
+      class="w-full h-full object-cover"
+    />
+    {% elif movie['poster_path'] == 'POSTER_VAL' %}
+    <img src="POSTER_VAL" alt="TITLE_VAL" class="w-full h-full object-cover" />
+    {% else %}
+    <div
+      class="w-full h-full bg-gray-800 flex flex-col items-center justify-center text-gray-500 p-4 text-center"
+    >
+      <ion-icon name="image-outline" size="large"></ion-icon>
+      <span class="text-xs mt-2">No Poster Available</span>
+    </div>
+    {% endif %}
+
+    <div
+      class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+    >
+      <div class="bg-white/20 backdrop-blur-md p-4 rounded-full">
+        <ion-icon name="search-outline" class="text-white text-3xl"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4">
+    <h3
+      class="font-bold text-sm line-clamp-1 group-hover:text-red-500 transition"
+    >
+      {{ movie['title'] }}
+    </h3>
+    <div class="flex justify-between items-center mt-2 font-mono">
+      <span class="text-xs text-gray-500">
+        {% if movie['release_date'] == 'DATE_VAL' %} DATE_VAL {% elif
+        movie['release_date'] %} {{ movie['release_date'][:4] }} {% else %} N/A
+        {% endif %}
+      </span>
+
+      <span class="flex items-center gap-1 text-xs text-yellow-500">
+        <ion-icon name="star"></ion-icon>
+        {{ movie['vote_average']|round(1) 
+            if movie['vote_average'] is number
+            else movie['vote_average'] }}
+      </span>
+    </div>
+  </div>
+</a>
+{% endmacro %}
