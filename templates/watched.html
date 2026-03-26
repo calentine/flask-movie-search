@@ -23,33 +23,21 @@
     {{ movie_card({'id': 'ID_VAL', 'title': 'TITLE_VAL', 'poster_path': 'POSTER_VAL', 'vote_average': 'VOTE_VAL', 'release_date': 'DATE_VAL'}) }}
 </template>
 
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script>
-  const watchedList = JSON.parse(localStorage.getItem("codeje_watched") || "[]");
-  const grid = document.getElementById("watchedGrid");
-  const empty = document.getElementById("emptyState");
-  const clearBtn = document.getElementById("clearBtn");
-  const templateHtml = document.getElementById("card-template").innerHTML;
+    // Just call the global function with your specific IDs
+    const template = document.getElementById("card-template").innerHTML;
+    
+    renderStoredMovieGrid(
+        "codeje_watched", 
+        "watchedGrid", 
+        "emptyState", 
+        "clearBtn", 
+        template
+    );
 
-  function clearWatched() {
-    if(confirm("Delete entire watched history?")) {
-        localStorage.removeItem('codeje_watched');
-        location.reload();
+    function clearWatched() {
+        clearStorageList("codeje_watched");
     }
-  }
-
-  if (watchedList.length === 0) {
-    empty.classList.remove("hidden");
-  } else {
-    clearBtn.classList.remove("hidden");
-    watchedList.forEach(movie => {
-      let html = templateHtml
-        .replace(/ID_VAL/g, movie.id)
-        .replace(/TITLE_VAL/g, movie.title)
-        .replace(/POSTER_VAL/g, `https://image.tmdb.org/t/p/w500${movie.poster}`)
-        .replace(/VOTE_VAL/g, movie.rating)
-        .replace(/DATE_VAL/g, movie.release_date || 'N/A');
-      grid.innerHTML += html;
-    });
-  }
 </script>
 {% endblock %}
