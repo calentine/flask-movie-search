@@ -22,8 +22,9 @@
 <template id="card-template">
     {{ movie_card({'id': 'ID_VAL', 'title': 'TITLE_VAL', 'poster_path': 'POSTER_VAL', 'vote_average': 'VOTE_VAL', 'release_date': 'DATE_VAL'}) }}
 </template>
+{% endblock %}
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}
 <script>
     // Just call the global function with your specific IDs
     const template = document.getElementById("card-template").innerHTML;
