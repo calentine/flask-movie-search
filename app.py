@@ -74,7 +74,9 @@ def search_movie():
         else:
             return "Failed to retrieve data from TMDB API", 500
     else:
-        return "No movie name provided", 400
+         return render_template(
+                "404.html"
+            )
 
 
 @app.route("/movie/<int:movie_id>")
